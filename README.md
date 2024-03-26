@@ -1,6 +1,10 @@
-# TP-Tree-LMD2-S1
+# TP2-TL-AEF
 
+In .\Script\, run the script for your OS and execute it. In theory, it should generate the Makefile needed, but I don't guarantee that all the C/C++ code will compile without errors.
 
+Note : you need to run the script from 
+```bash
+$ .../Script> 
+```
 
-In `.\Script\` run the secrept for your favorot way to build and you will get a build systel 
-NOTE for window gcc you need to add ``CC=gcc  to the line 20 in TP.make![Alt text](image.png)# TP2-TL-AEF
+Note: For Windows GCC, you need to add CC=gcc to line 20 in TP.make 
