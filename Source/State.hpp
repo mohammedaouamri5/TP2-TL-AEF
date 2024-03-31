@@ -34,7 +34,7 @@ public:
     // State * MOVE()  ;
     State *can_move(const char __str) const &;
 
-    void push_Vertex(const Vertex &new__vertex);
+    State* push_Vertex(const Vertex &new__vertex);
     inline bool operator==(const State &other) const &
     {
 

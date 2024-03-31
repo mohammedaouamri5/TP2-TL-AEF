@@ -3,6 +3,9 @@
 #include "iostream"
 #include "State.hpp"
 #include "Vertex.hpp"
+#include "language.hpp"
+
+
 // #include "spdlog/include/spdlog/spdlog.h"
 
 // // #include<fmt.less>/
@@ -10,14 +13,20 @@
 
 #define Is_IN(A) ((A) ? "est appartien" : "n'est pas appartien")
 
-int AUTO_MATH(State*state, const char *__str)
-{ 
-
-
+int AUTO_MATH(State *state, const char *__str)
+{
+  
+  if(!state) 
+  {
+    spdlog::critical("The AEF blocked");
+    return 0; 
+  }
+  spdlog::info("__word = {}" , __str);
+  
   if (state->Is_Final() && __str[0] == '\0')
-      return 1;
-    else if( __str[0] != '\0')
-        return AUTO_MATH(state->can_move(__str[0]), __str + 1);
+    return 1;
+  else if (__str[0] != '\0')
+    return AUTO_MATH(state->can_move(__str[0]), __str + 1);
 
   return 0;
 }
@@ -25,38 +34,50 @@ int AUTO_MATH(State*state, const char *__str)
 int main(int argc, char const *argv[])
 {
 
-  // printf("WOW");
+
+
   spdlog::set_pattern("[%H:%M:%S] %^[%l] [%v]%$");
+  spdlog::set_level(spdlog::level::debug); // Set global log level to debug
 
+
+  Language letter , chiffre ; 
+  for (char Lmin = 'a' , Lmaj = 'A' , _Nb = '0' ; 
+            Lmin != ('z' + 1) ||
+            Lmaj != ('Z' + 1) ||
+            _Nb != ('9' + 1)
+            ;)
+  {
+    if(Lmin != ('z' + 1 )) letter.insert(Lmin++)  ;
+    if(Lmaj != ('Z' + 1)) letter.insert(Lmaj++)  ;
+    if(_Nb != ('9' + 1)) chiffre.insert(_Nb++) ;
+  }
+
+  spdlog::debug("L = {}" , (std::string)letter); 
+  spdlog::debug("Ch = {}" , (std::string)chiffre); 
   // State
-  State Q0("0", 0);
-  State Q1("1", 0);
-  State Q2("2", 0);
-  State Q3("3", 1);
+  State Q1("Q1", 0);
+  State Q2("Q2", 0);
+  State Q3("Q3", 0);
+  State Q4("Q4", 1);
+  State Q5("Q5", 1);
 
-  // spdlog::info("test logger {}", (char *)Q1);
+  Q1.push_Vertex(Vertex(&Q2 , letter));
+  Q1.push_Vertex(Vertex(&Q3 , chiffre));
+  Language combo = letter/chiffre; 
+  Q3.push_Vertex(Vertex(&Q5 , chiffre )) ; 
+  Q5.push_Vertex(Vertex(&Q3 , chiffre )) ;
 
-  Vertex Q0Q11(&Q1, '1');
-  Vertex Q1Q01(&Q0, '1');
-  Vertex Q2Q31(&Q3, '1');
-  Vertex Q3Q21(&Q2, '1');
+  Q2.push_Vertex(Vertex(&Q4 , letter/chiffre ));  
 
-  Vertex Q0Q10(&Q1, '0');
-  Vertex Q1Q00(&Q0, '0');
-  Vertex Q2Q30(&Q3, '0');
-  Vertex Q3Q20(&Q2, '0');
-  // // Q3Q20
+  Q4.push_Vertex(Vertex(&Q2 , letter/chiffre )) ; 
 
-  Q0.push_Vertex(Q0Q11);
-  Q0.push_Vertex(Q0Q10);
-  Q1.push_Vertex(Q1Q01);
-  Q1.push_Vertex(Q1Q00);
-  Q2.push_Vertex(Q2Q31);
-  Q2.push_Vertex(Q2Q30);
-  Q3.push_Vertex(Q3Q21);
-  Q3.push_Vertex(Q3Q20);
 
-  int result = AUTO_MATH(&Q2,"0");
-  std::cout << Is_IN( result) << std::endl ;
+  int result = AUTO_MATH(&Q1, "222");
+  std::cout << Is_IN(result) << std::endl;
+
+  return 0; 
+  
+ 
+ 
   return 0;
 }
