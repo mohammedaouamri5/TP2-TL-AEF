@@ -51,28 +51,22 @@ int main(int argc, char const *argv[])
     if(Lmaj != ('Z' + 1)) letter.insert(Lmaj++)  ;
     if(_Nb != ('9' + 1)) chiffre.insert(_Nb++) ;
   }
-
-  spdlog::debug("L = {}" , (std::string)letter); 
-  spdlog::debug("Ch = {}" , (std::string)chiffre); 
-  // State
+ 
   State Q1("Q1", 0);
   State Q2("Q2", 0);
   State Q3("Q3", 0);
   State Q4("Q4", 1);
   State Q5("Q5", 1);
-
+   
   Q1.push_Vertex(Vertex(&Q2 , letter));
   Q1.push_Vertex(Vertex(&Q3 , chiffre));
-  Language combo = letter/chiffre; 
   Q3.push_Vertex(Vertex(&Q5 , chiffre )) ; 
   Q5.push_Vertex(Vertex(&Q3 , chiffre )) ;
-
-  Q2.push_Vertex(Vertex(&Q4 , letter/chiffre ));  
-
+  Q2.push_Vertex(Vertex(&Q4 , letter/chiffre ));
   Q4.push_Vertex(Vertex(&Q2 , letter/chiffre )) ; 
 
 
-  int result = AUTO_MATH(&Q1, "222");
+  int result = AUTO_MATH(&Q1, "2222");
   std::cout << Is_IN(result) << std::endl;
 
   return 0; 
