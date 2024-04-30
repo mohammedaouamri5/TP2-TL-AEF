@@ -65,8 +65,10 @@ int main(int argc, char const *argv[])
   Q2.push_Vertex(Vertex(&Q4 , letter/chiffre ));
   Q4.push_Vertex(Vertex(&Q2 , letter/chiffre )) ; 
 
-
-  int result = AUTO_MATH(&Q1, "2222");
+  std::string input ; 
+  printf("Input The word  >> "); 
+  std::cin >> input ;
+  int result = AUTO_MATH(&Q1, input.c_str());
   std::cout << Is_IN(result) << std::endl;
 
   return 0; 
