@@ -9,8 +9,7 @@ $ .../Script>
 
 Note: For Windows GCC, you need to add CC=gcc to line 20 in TP.make 
 
-
-RMTF : 
+# **RTFM** 
 ## **dependencies** : 
 spdlog : [**here**](https://github.com/gabime/spdlog)
 ## **Features** : [**here**](https://github.com/gabime/spdlog?tab=readme-ov-file#features)
