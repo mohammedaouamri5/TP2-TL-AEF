@@ -8,3 +8,8 @@ $ .../Script>
 ```
 
 Note: For Windows GCC, you need to add CC=gcc to line 20 in TP.make 
+
+
+RMTF : 
+## **dependencies** : 
+spdlog : [**spdlog**](https://github.com/gabime/spdlog)
