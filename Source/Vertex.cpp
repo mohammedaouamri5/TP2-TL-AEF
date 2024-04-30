@@ -7,14 +7,8 @@
 
 Vertex::Vertex( State*p__dis, const Language &p___str) :
     __dis(p__dis),  __str(p___str)
-{
+{}
 
-}
-
-// Vertex::Vertex(const State  & p__src,State &   p__dis ,const char & p___str ):
-//     __src(p__src),  __dis(p__dis),__str(p___str)
-// {
-// }
 
 State * Vertex::MOVE() const &  
 {

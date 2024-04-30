@@ -3,7 +3,6 @@
 #ifndef __VECTOR_H_
 #define __VECTOR_H_
 
-// #include "Node.hpp"
 #include "State.hpp"
 #include "language.hpp"
 class State;
@@ -18,7 +17,7 @@ enum Equel
 class Vertex
 {
 private:
-    // State __src;
+
     State * __dis = NULL;
 
 public:
@@ -30,17 +29,7 @@ public:
 
  
     operator std::string () const &;
- 
-    // inline bool operator==(const Vertex &other) const & {
-    //     return (
-    //         // Equel__src * (this->__src == other.__src) |
-    //         // Equel__dis * (this->__dis == other.__dis) |
-    //         Equel__str * (this->__str == other.__str));
-    //     //  other.__str ==
-    // }
 
-
-    // friend std::ostream &operator<<(std::ostream &os, const Vertex &vertex);
     ~Vertex();
 };
 

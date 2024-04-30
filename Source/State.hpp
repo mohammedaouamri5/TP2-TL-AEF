@@ -18,13 +18,10 @@ private:
     bool finel;
     // State *next_state = NULL;
 public:
-    // State(const char *p_name, std::vector<Vertex> p_vector);
     
     
-    /**
-     * p_finel = false
-     */
-    State(const char *p_name, bool p_finel = false);
+    // name , and 
+    State(const char *p_name, bool p_is_finel = false);
     bool Is_Final() const &;
 
     explicit operator const char *() const & {

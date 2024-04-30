@@ -2,15 +2,15 @@
 #include"Vertex.hpp"
 #include "spdlog/spdlog.h"
  
-State::State(const char * p_name ,bool p_finel )
+State::State(const char * p_name ,bool p_is_finel )
 {
     spdlog::info("CREAT STATE [{}]{}" ,
     p_name , 
-    p_finel ? " IS_FINAL" : ""
+    p_is_finel ? " IS_FINAL" : ""
     )
     ;
 
-    this->finel =  p_finel;
+    this->finel =  p_is_finel;
     // this->type
     name = (char*) malloc(strlen(p_name)) ;
     strcpy(this->name , p_name); 
