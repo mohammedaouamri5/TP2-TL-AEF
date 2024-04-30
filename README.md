@@ -1,6 +1,6 @@
 # TP2-TL-AEF
 
-In .\Script\, run the script for your OS and execute it. In theory, it should generate the Makefile needed, but I don't guarantee that all the C/C++ code will compile without errors.
+In `.\Script\`, run the script for your OS and execute it. In theory, it should generate the Makefile needed, but I don't guarantee that all the C/C++ code will compile without errors.
 
 Note : you need to run the script from 
 ```bash
