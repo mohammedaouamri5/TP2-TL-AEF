@@ -1,4 +1,5 @@
 *bin
 *LOG
 Makefile
-*make
+
+*.make
