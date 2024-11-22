@@ -4,6 +4,8 @@
 #include "State.hpp"
 #include "Vertex.hpp"
 #include "language.hpp"
+#include <string>
+#include <vector>
 
 
 // #include "spdlog/include/spdlog/spdlog.h"
@@ -15,7 +17,6 @@
 
 int AUTO_MATH(State *state, const char *__str)
 {
-  
   if(!state) 
   {
     spdlog::critical("The AEF blocked");
@@ -33,9 +34,6 @@ int AUTO_MATH(State *state, const char *__str)
 
 int main(int argc, char const *argv[])
 {
-
-
-
   spdlog::set_pattern("[%H:%M:%S] %^[%l] [%v]%$");
   spdlog::set_level(spdlog::level::debug); // Set global log level to debug
 
@@ -52,21 +50,28 @@ int main(int argc, char const *argv[])
     if(_Nb != ('9' + 1)) chiffre.insert(_Nb++) ;
   }
  
-  State Q1("Q1", 0);
-  State Q2("Q2", 0);
-  State Q3("Q3", 0);
-  State Q4("Q4", 1);
-  State Q5("Q5", 1);
-   
-  Q1.push_Vertex(Vertex(&Q2 , letter));
-  Q1.push_Vertex(Vertex(&Q3 , chiffre));
-  Q3.push_Vertex(Vertex(&Q5 , chiffre )) ; 
-  Q5.push_Vertex(Vertex(&Q3 , chiffre )) ;
-  Q2.push_Vertex(Vertex(&Q4 , letter/chiffre ));
-  Q4.push_Vertex(Vertex(&Q2 , letter/chiffre )) ; 
+  std::vector<State*> Q(7) ;
+  for (int i = 0 ; i < 7 ; i++)
+  {
+    Q[i] = new State(std::to_string(i).c_str(), int(i == 6)) ;
+  }
 
 
-  int result = AUTO_MATH(&Q1, "2222");
+  Q[0]->push_Vertex(Vertex(Q[1], letter));
+  Q[1]->push_Vertex(Vertex(Q[1], letter/chiffre));
+  Q[1]->push_Vertex(Vertex(Q[2], "@"));
+  Q[2]->push_Vertex(Vertex(Q[2], letter));
+  Q[2]->push_Vertex(Vertex(Q[3], "."));
+  Q[3]->push_Vertex(Vertex(Q[4] , "c" )); 
+  Q[4]->push_Vertex(Vertex(Q[5] , "o" )); 
+  Q[5]->push_Vertex(Vertex(Q[6] , "m"));
+
+  
+
+  std::string __input; 
+  printf("Input : ");
+  std::getline(std::cin, __input);
+  int result = AUTO_MATH(Q[0], __input.c_str());
   std::cout << Is_IN(result) << std::endl;
 
   return 0; 
